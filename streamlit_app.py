@@ -20,6 +20,6 @@ type = st.selectbox('Select Type of Joke:', ['One Liners','puns','Knock Knock Jo
 
 # Generate Joke
 if st.button('Generate'):
-     generatejoke(type)
+     generate_joke(type)
 else:
      st.write('Please Press Generate Button.')
