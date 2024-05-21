@@ -1,18 +1,25 @@
 import streamlit as st
-from langchain.llms import OpenAI
+import openai
+from langchain_openai import ChatOpenAI
 
-st.title('🦜🔗 Quickstart App')
-
+# Set your OpenAI API key here
 openai_api_key = st.sidebar.text_input('OpenAI API Key', type='password')
 
-def generate_response(input_text):
-    llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-    st.info(llm(input_text))
+# Function to convert text to local slang
+def generate_joke(type):
+    llm = ChatOpenAI(api_key=openai_api_key, model_name="gpt-3.5-turbo", temperature = 0.5)
+    prompt=f"Tell me a {type} joke that is kid friendly"
+    response = llm.stream(prompt)
+    return (response)
 
-with st.form('my_form'):
-    text = st.text_area('Enter text:', 'What are the three key pieces of advice for learning how to code?')
-    submitted = st.form_submit_button('Submit')
-    if not openai_api_key.startswith('sk-'):
-        st.warning('Please enter your OpenAI API key!', icon='⚠')
-    if submitted and openai_api_key.startswith('sk-'):
-        generate_response(text)
+# Streamlit App
+st.title('Joke Generator')
+
+# User input
+type = st.selectbox('Select Type of Joke:', ['One Liners','puns','Knock Knock Jokes','Observational','Riddles', 'Animal','Light Bulb'])  
+
+# Generate Joke
+if st.button('Generate'):
+     generatejoke(type)
+else:
+     st.write('Please Press Generate Button.')
