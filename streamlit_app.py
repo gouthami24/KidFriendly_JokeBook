@@ -16,7 +16,7 @@ def generate_joke(type):
 st.title('Joke Generator')
 
 # User input
-type = st.selectbox('Select Type of Joke:', ['One Liners','puns','Knock Knock Jokes','Observational','Riddles', 'Animal','Light Bulb'])  
+type = st.selectbox('Select Type of Joke:', ['One Liners','Knock Knock Jokes','Observational','Riddles', 'Animal','Light Bulb'])  
 
 # Generate Joke
 if st.button('Generate'):
